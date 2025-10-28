@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Inbox - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="inbox.html" class="active">Messages</a></li>
+                <li><a href="connections.html">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="inbox.html" class="active">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: between; align-items: center;">
+                            <h1>Smart Inbox</h1>
+                            <div style="display: flex; gap: 1rem;">
+                                <button class="btn btn-outline">📥 Tout marquer comme lu</button>
+                                <button class="btn btn-primary">🔄 Actualiser</button>
+                            </div>
+                        </div>
+
+                        <!-- Filtres -->
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                            <button class="btn btn-outline active">Tous (24)</button>
+                            <button class="btn btn-outline">YouTube (8)</button>
+                            <button class="btn btn-outline">Twitch (6)</button>
+                            <button class="btn btn-outline">TikTok (5)</button>
+                            <button class="btn btn-outline">Instagram (5)</button>
+                            <button class="btn btn-outline">Non lus (3)</button>
+                        </div>
+
+                        <!-- Liste des messages -->
+                        <div class="message-list">
+                            <!-- Message 1 -->
+                            <div class="message-item unread">
+                                <div class="message-header">
+                                    <div class="message-sender">Jean Dupont</div>
+                                    <div class="message-time">Il y a 15 min</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="badge badge-primary">YouTube</span>
+                                    <strong>Nouveau commentaire sur votre vidéo</strong>
+                                </div>
+                                <div class="message-preview">
+                                    "Super tutoriel ! J'ai enfin compris comment..."
+                                </div>
+                            </div>
+
+                            <!-- Message 2 -->
+                            <div class="message-item unread">
+                                <div class="message-header">
+                                    <div class="message-sender">Marie Martin</div>
+                                    <div class="message-time">Il y a 30 min</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="badge" style="background: #9146ff; color: white;">Twitch</span>
+                                    <strong>Nouveau follower</strong>
+                                </div>
+                                <div class="message-preview">
+                                    Marie Martin a commencé à vous suivre sur Twitch
+                                </div>
+                            </div>
+
+                            <!-- Message 3 -->
+                            <div class="message-item">
+                                <div class="message-header">
+                                    <div class="message-sender">Pierre Leroy</div>
+                                    <div class="message-time">Il y a 2 heures</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="badge" style="background: #000000; color: white;">TikTok</span>
+                                    <strong>Votre vidéo devient virale</strong>
+                                </div>
+                                <div class="message-preview">
+                                    Votre vidéo a dépassé les 10K vues en 24 heures
+                                </div>
+                            </div>
+
+                            <!-- Message 4 -->
+                            <div class="message-item">
+                                <div class="message-header">
+                                    <div class="message-sender">Assistant IA</div>
+                                    <div class="message-time">Il y a 4 heures</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="badge badge-warning">Suggestion</span>
+                                    <strong>Idée de contenu générée</strong>
+                                </div>
+                                <div class="message-preview">
+                                    Basé sur vos performances, voici une idée de vidéo qui pourrait bien marcher...
+                                </div>
+                            </div>
+
+                            <!-- Message 5 -->
+                            <div class="message-item">
+                                <div class="message-header">
+                                    <div class="message-sender">Sarah Cohen</div>
+                                    <div class="message-time">Il y a 6 heures</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <span class="badge" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white;">Instagram</span>
+                                    <strong>Nouveau commentaire sur votre post</strong>
+                                </div>
+                                <div class="message-preview">
+                                    "J'adore cette photo ! Où était-elle prise ?"
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Réponse rapide -->
+                        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                            <h3 style="margin-bottom: 1rem;">Réponse Rapide</h3>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="4" placeholder="Tapez votre réponse ici..."></textarea>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="btn btn-outline">💡 IA</button>
+                                    <button class="btn btn-outline">😊</button>
+                                    <button class="btn btn-outline">📎</button>
+                                </div>
+                                <button class="btn btn-primary">Envoyer la réponse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
