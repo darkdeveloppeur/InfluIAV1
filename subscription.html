@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Abonnement - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="inbox.html">Messages</a></li>
+                <li><a href="connections.html">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="inbox.html">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html" class="active">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Mon Abonnement</h1>
+                            <p>Gérez votre plan et vos factures</p>
+                        </div>
+
+                        <!-- Statut actuel -->
+                        <div class="card" style="background: #f0f7ff; margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: between; align-items: center;">
+                                <div>
+                                    <h3 style="margin-bottom: 0.5rem;">Plan Créateur</h3>
+                                    <p style="margin: 0; color: var(--gray);">€39/mois • Renouvellement le 15 décembre 2024</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span class="badge badge-success" style="font-size: 1rem;">Actif</span>
+                                    <div style="margin-top: 0.5rem;">
+                                        <button class="btn btn-outline">Changer de plan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-2" style="gap: 2rem;">
+                            <!-- Détails du plan -->
+                            <div>
+                                <h3 style="margin-bottom: 1rem;">Détails de votre plan</h3>
+                                <div class="card">
+                                    <ul class="feature-list">
+                                        <li>✓ 10 connexions de réseaux sociaux</li>
+                                        <li>✓ IA Scénariste avancée</li>
+                                        <li>✓ Générateur de miniatures illimité</li>
+                                        <li>✓ Sous-titres automatiques (20h/mois)</li>
+                                        <li>✓ Smart Inbox</li>
+                                        <li>✓ Statistiques avancées</li>
+                                        <li>✓ Support prioritaire</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Utilisation -->
+                                <div style="margin-top: 2rem;">
+                                    <h4 style="margin-bottom: 1rem;">Utilisation du mois</h4>
+                                    <div class="card">
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; justify-content: between; margin-bottom: 0.5rem;">
+                                                <span>Sous-titres automatiques</span>
+                                                <span>5h / 20h</span>
+                                            </div>
+                                            <div style="height: 8px; background: #eee; border-radius: 4px; overflow: hidden;">
+                                                <div style="height: 100%; background: var(--success); width: 25%;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; justify-content: between; margin-bottom: 0.5rem;">
+                                                <span>Génération IA</span>
+                                                <span>45 / Illimité</span>
+                                            </div>
+                                            <div style="height: 8px; background: #eee; border-radius: 4px;"></div>
+                                        </div>
+                                        <div>
+                                            <div style="display: flex; justify-content: between; margin-bottom: 0.5rem;">
+                                                <span>Connexions réseaux</span>
+                                                <span>3 / 10</span>
+                                            </div>
+                                            <div style="height: 8px; background: #eee; border-radius: 4px; overflow: hidden;">
+                                                <div style="height: 100%; background: var(--warning); width: 30%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Facturation -->
+                            <div>
+                                <h3 style="margin-bottom: 1rem;">Facturation</h3>
+                                
+                                <!-- Méthode de paiement -->
+                                <div class="card" style="margin-bottom: 1.5rem;">
+                                    <h4 style="margin-bottom: 1rem;">Méthode de paiement</h4>
+                                    <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: #f8f9fa; border-radius: 6px;">
+                                        <div style="display: flex; align-items: center; gap: 1rem;">
+                                            <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white;">💳</div>
+                                            <div>
+                                                <div style="font-weight: 600;">Carte Visa se terminant par 4242</div>
+                                                <div style="font-size: 0.9rem; color: var(--gray);">Expire le 12/2025</div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline">Modifier</button>
+                                    </div>
+                                </div>
+
+                                <!-- Historique des factures -->
+                                <div class="card">
+                                    <h4 style="margin-bottom: 1rem;">Historique des factures</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Montant</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>15 nov. 2024</td>
+                                                <td>€39,00</td>
+                                                <td><span class="badge badge-success">Payé</span></td>
+                                                <td><a href="#">Télécharger</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>15 oct. 2024</td>
+                                                <td>€39,00</td>
+                                                <td><span class="badge badge-success">Payé</span></td>
+                                                <td><a href="#">Télécharger</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>15 sept. 2024</td>
+                                                <td>€39,00</td>
+                                                <td><span class="badge badge-success">Payé</span></td>
+                                                <td><a href="#">Télécharger</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Annulation -->
+                                <div class="card" style="margin-top: 1.5rem; border: 1px solid var(--danger);">
+                                    <h4 style="color: var(--danger); margin-bottom: 1rem;">Zone de danger</h4>
+                                    <p style="margin-bottom: 1rem;">La résiliation de votre abonnement est immédiate et vous perdrez l'accès à toutes les fonctionnalités premium.</p>
+                                    <button class="btn" style="background: var(--danger); color: white;">Résilier l'abonnement</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
