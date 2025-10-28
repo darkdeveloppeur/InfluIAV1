@@ -7,10 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const SUPABASE_KEY = '__SUPABASE_KEY__';
     // =================================================================
 
-    // Initialiser le client Supabase
-    let supabase;
+    // Déclarer notre variable client
+    let supabaseClient;
+
     try {
-        supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Initialiser le client
+        // 'supabase' (à droite) vient du script CDN
+        // 'supabaseClient' (à gauche) est notre variable
+        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     } catch (e) {
         console.error('Erreur: Supabase n\'est pas chargé.', e);
         return; 
@@ -29,19 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
-            const fullName = document.getElementById('signup-name').value; // On récupère le nom
+            const fullName = document.getElementById('signup-name').value;
             const submitButton = signupForm.querySelector('button[type="submit"]');
             submitButton.textContent = 'Création en cours...';
             submitButton.disabled = true;
 
-            // Le Trigger SQL gère la création de profil.
-            // Nous passons le nom dans 'options.data' pour que le Trigger puisse le lire.
-            const { data, error } = await supabase.auth.signUp({
+            // Utiliser 'supabaseClient'
+            const { data, error } = await supabaseClient.auth.signUp({
                 email: email, 
                 password: password,
                 options: {
                     data: {
-                        full_name: fullName // Le Trigger SQL va récupérer ça
+                        full_name: fullName
                     }
                 }
             });
@@ -51,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.textContent = 'Créer mon compte';
                 submitButton.disabled = false;
             } else {
-                // L'inscription a réussi, le Trigger a créé le profil.
                 alert('Inscription réussie ! Redirection...');
                 window.location.href = 'dashboard.html';
             }
@@ -69,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Connexion en cours...';
             submitButton.disabled = true;
 
-            const { data, error } = await supabase.auth.signInWithPassword({
+            // Utiliser 'supabaseClient'
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
                 email: email, password: password,
             });
 
@@ -94,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Envoi en cours...';
             submitButton.disabled = true;
 
-            const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+            // Utiliser 'supabaseClient'
+            const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, {
                 redirectTo: 'https://influiav1-1.onrender.com/reset-password.html'
             });
 
@@ -109,19 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =============================================
-    // NOUVEAU BLOC : Connexion Google
+    // Connexion Google
     // =============================================
     async function signInWithGoogle() {
-        const { data, error } = await supabase.auth.signInWithOAuth({
+        // Utiliser 'supabaseClient'
+        const { data, error } = await supabaseClient.auth.signInWithOAuth({
             provider: 'google'
-            // Pas besoin de 'redirectTo', Supabase utilise l'URL de ton site
-            // que tu as configurée dans Authentication -> URL Configuration
         });
 
         if (error) {
             alert('Erreur lors de la connexion Google : ' + error.message);
         }
-        // Pas de redirection ici, Supabase gère le pop-up.
     }
 
     const googleLoginBtn = document.getElementById('google-login-btn');
