@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="inbox.html">Messages</a></li>
+                <li><a href="connections.html">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="inbox.html">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html" class="active">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Mon Profil et Paramètres</h1>
+                        </div>
+
+                        <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 2rem;">
+                            <!-- Navigation paramètres -->
+                            <div>
+                                <div class="sidebar">
+                                    <ul class="sidebar-menu">
+                                        <li><a href="#profile" class="active">👤 Informations personnelles</a></li>
+                                        <li><a href="#security">🔒 Sécurité du compte</a></li>
+                                        <li><a href="#notifications">🔔 Notifications</a></li>
+                                        <li><a href="#privacy">🛡️ Confidentialité</a></li>
+                                        <li><a href="#billing">💳 Facturation</a></li>
+                                        <li><a href="#api">🔑 API & Intégrations</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Contenu paramètres -->
+                            <div>
+                                <!-- Informations personnelles -->
+                                <div id="profile">
+                                    <h3 style="margin-bottom: 1.5rem;">Informations Personnelles</h3>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Photo de profil</label>
+                                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                            <div style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">MC</div>
+                                            <div>
+                                                <button class="btn btn-outline">Changer la photo</button>
+                                                <button class="btn btn-outline">Supprimer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nom complet</label>
+                                        <input type="text" class="form-control" value="Mon Nom Créatif">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nom d'utilisateur</label>
+                                        <input type="text" class="form-control" value="monnomcreatif">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="contact@monnomcreatif.com">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Bio</label>
+                                        <textarea class="form-control" rows="4">Créateur de contenu passionné | Gaming | Tech | Tutoriels ✨</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Site web</label>
+                                        <input type="url" class="form-control" value="https://monnomcreatif.com">
+                                    </div>
+
+                                    <button class="btn btn-primary">Enregistrer les modifications</button>
+                                </div>
+
+                                <!-- Sécurité -->
+                                <div id="security" style="display: none; margin-top: 2rem;">
+                                    <h3 style="margin-bottom: 1.5rem;">Sécurité du Compte</h3>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Mot de passe actuel</label>
+                                        <input type="password" class="form-control" placeholder="Entrez votre mot de passe actuel">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nouveau mot de passe</label>
+                                        <input type="password" class="form-control" placeholder="Nouveau mot de passe">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Confirmer le nouveau mot de passe</label>
+                                        <input type="password" class="form-control" placeholder="Confirmez le nouveau mot de passe">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <input type="checkbox">
+                                            <span>Activer l'authentification à deux facteurs</span>
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary">Mettre à jour la sécurité</button>
+                                </div>
+
+                                <!-- Sessions actives -->
+                                <div style="margin-top: 2rem;">
+                                    <h4 style="margin-bottom: 1rem;">Sessions actives</h4>
+                                    <div class="card">
+                                        <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; border-bottom: 1px solid #eee;">
+                                            <div>
+                                                <div style="font-weight: 600;">Chrome sur Windows</div>
+                                                <div style="font-size: 0.9rem; color: var(--gray);">Paris, France • Actuelle</div>
+                                            </div>
+                                            <span class="badge badge-success">En ligne</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: between; align-items: center; padding: 1rem;">
+                                            <div>
+                                                <div style="font-weight: 600;">Safari sur iPhone</div>
+                                                <div style="font-size: 0.9rem; color: var(--gray);">Lyon, France • Il y a 2 heures</div>
+                                            </div>
+                                            <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">Déconnecter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Navigation entre les sections de paramètres
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Masquer toutes les sections
+                document.querySelectorAll('[id]').forEach(section => {
+                    if (['profile', 'security', 'notifications', 'privacy', 'billing', 'api'].includes(section.id)) {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Afficher la section cible
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Mettre à jour la navigation active
+                document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
