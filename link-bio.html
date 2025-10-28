@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link-in-Bio - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="inbox.html">Messages</a></li>
+                <li><a href="connections.html">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="inbox.html">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html" class="active">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: between; align-items: center;">
+                            <h1>Éditeur Link-in-Bio</h1>
+                            <div style="display: flex; gap: 1rem;">
+                                <button class="btn btn-outline">Aperçu</button>
+                                <button class="btn btn-primary">Publier les modifications</button>
+                            </div>
+                        </div>
+
+                        <div class="grid" style="grid-template-columns: 1fr 400px; gap: 2rem;">
+                            <!-- Éditeur -->
+                            <div>
+                                <h3 style="margin-bottom: 1rem;">Personnalisation</h3>
+                                
+                                <!-- Informations du profil -->
+                                <div class="card" style="margin-bottom: 1.5rem;">
+                                    <h4 style="margin-bottom: 1rem;">Informations du Profil</h4>
+                                    <div class="form-group">
+                                        <label class="form-label">Nom d'affichage</label>
+                                        <input type="text" class="form-control" value="MonNomCreatif">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Bio</label>
+                                        <textarea class="form-control" rows="3">Créateur de contenu passionné | Gaming | Tech | Tutoriels ✨</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Photo de profil</label>
+                                        <input type="file" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Liens -->
+                                <div class="card">
+                                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;">
+                                        <h4 style="margin: 0;">Mes Liens</h4>
+                                        <button class="btn btn-primary">➕ Ajouter un lien</button>
+                                    </div>
+                                    
+                                    <!-- Lien 1 -->
+                                    <div style="padding: 1rem; border: 1px solid #eee; border-radius: 6px; margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                                            <strong>Ma Chaîne YouTube</strong>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">✏️</button>
+                                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">🗑️</button>
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--gray); font-size: 0.9rem;">https://youtube.com/@monnomcreatif</div>
+                                    </div>
+
+                                    <!-- Lien 2 -->
+                                    <div style="padding: 1rem; border: 1px solid #eee; border-radius: 6px; margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                                            <strong>Mon Twitch</strong>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">✏️</button>
+                                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">🗑️</button>
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--gray); font-size: 0.9rem;">https://twitch.tv/monnomcreatif</div>
+                                    </div>
+
+                                    <!-- Lien 3 -->
+                                    <div style="padding: 1rem; border: 1px solid #eee; border-radius: 6px;">
+                                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                                            <strong>Mon Instagram</strong>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">✏️</button>
+                                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">🗑️</button>
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--gray); font-size: 0.9rem;">https://instagram.com/monnomcreatif</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Aperçu -->
+                            <div>
+                                <h3 style="margin-bottom: 1rem;">Aperçu Mobile</h3>
+                                <div style="border: 2px solid #ddd; border-radius: 20px; padding: 2rem; background: #f8f9fa; max-width: 300px; margin: 0 auto;">
+                                    <!-- En-tête profil -->
+                                    <div style="text-align: center; margin-bottom: 2rem;">
+                                        <div style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">MC</div>
+                                        <h3 style="margin-bottom: 0.5rem;">MonNomCreatif</h3>
+                                        <p style="color: var(--gray); margin-bottom: 1rem;">Créateur de contenu passionné | Gaming | Tech | Tutoriels ✨</p>
+                                        <div style="display: flex; justify-content: center; gap: 1rem;">
+                                            <span style="font-size: 0.9rem;">1.2K abonnés</span>
+                                            <span style="font-size: 0.9rem;">45 vidéos</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Liens -->
+                                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                        <a href="#" style="display: block; padding: 1rem; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 500;">Ma Chaîne YouTube</a>
+                                        <a href="#" style="display: block; padding: 1rem; background: #9146ff; color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 500;">Mon Twitch</a>
+                                        <a href="#" style="display: block; padding: 1rem; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 500;">Mon Instagram</a>
+                                    </div>
+
+                                    <!-- Statistiques -->
+                                    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd;">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: center;">
+                                            <div>
+                                                <div style="font-weight: bold; color: var(--primary);">1.2K</div>
+                                                <div style="font-size: 0.8rem; color: var(--gray);">Abonnés</div>
+                                            </div>
+                                            <div>
+                                                <div style="font-weight: bold; color: var(--primary);">156K</div>
+                                                <div style="font-size: 0.8rem; color: var(--gray);">Vues</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- URL de partage -->
+                                <div style="margin-top: 1.5rem; text-align: center;">
+                                    <p style="margin-bottom: 0.5rem; font-weight: 500;">Votre URL personnalisée :</p>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <input type="text" class="form-control" value="https://creatorsuite.com/monnomcreatif" readonly>
+                                        <button class="btn btn-outline">Copier</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
