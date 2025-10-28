@@ -1,20 +1,19 @@
 services:
   - type: web
     name: creator-suite-dev
-    # 1. Changer 'static' en 'node' pour exécuter des scripts
+    # 1. On dit que c'sest un service "node"
     env: node
-    # 2. Spécifier une version de Node
     nodeVersion: "18"
     
-    # 3. Dire à Render comment "construire" le site
-    # Il va installer 'serve' PUIS exécuter 'npm run build' (qui lance inject-env.js)
-    buildCommand: "npm install && npm run build"
+    # 2. On dit à Render comment "builder" le site
+    #    Il va installer les dépendances PUIS lancer le script "build"
+    buildCommand: "yarn install && yarn run build"
     
-    # 4. Commande de démarrage SANS le '-s' (pour corriger les redirections)
-    startCommand: "npx serve -l $PORT"
+    # 3. On dit à Render comment lancer le site (il utilise le script "start" de package.json)
+    startCommand: "yarn start"
     
     envVars:
-      # Render lira tes variables (SUPABASE_URL, etc.) automatiquement
+      # Render lira automatiquement tes variables (SUPABASE_URL, etc.)
       - key: NODE_ENV
         value: development
       
