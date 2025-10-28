@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Connexions - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="inbox.html">Messages</a></li>
+                <li><a href="connections.html" class="active">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="inbox.html">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html" class="active">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Mes Connexions</h1>
+                            <p>Gérez vos comptes de réseaux sociaux connectés et utilisez l'IA pour optimiser votre contenu</p>
+                        </div>
+
+                        <!-- Comptes connectés -->
+                        <div style="margin-bottom: 2rem;">
+                            <h3>Comptes Connectés</h3>
+                            <div class="grid grid-2" style="margin-top: 1rem;">
+                                <!-- YouTube -->
+                                <div class="card" style="display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: #ff0000; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">YT</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">Ma Chaîne YouTube</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">1.2K abonnés • Connecté</div>
+                                    </div>
+                                    <button class="btn btn-outline">Gérer</button>
+                                </div>
+
+                                <!-- Twitch -->
+                                <div class="card" style="display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: #9146ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">TW</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">Mon Compte Twitch</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">856 followers • Connecté</div>
+                                    </div>
+                                    <button class="btn btn-outline">Gérer</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assistant IA -->
+                        <div style="margin-bottom: 2rem;">
+                            <h3>Assistant IA</h3>
+                            <div class="card" style="background: #f0f7ff;">
+                                <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">🤖</div>
+                                    <div style="flex: 1;">
+                                        <h4 style="margin-bottom: 0.5rem;">Analyse de vos performances</h4>
+                                        <p style="margin-bottom: 1rem;">Basé sur vos données, voici mes recommandations pour améliorer votre engagement :</p>
+                                        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                                            <li>Vos vidéos tutorielles ont 45% plus d'engagement que les autres formats</li>
+                                            <li>Poster entre 18h et 21h augmente vos vues de 30% en moyenne</li>
+                                            <li>Les miniatures avec du texte rouge obtiennent 25% plus de clics</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Outils IA -->
+                        <div>
+                            <h3>Outils IA</h3>
+                            <div class="grid grid-3" style="margin-top: 1rem;">
+                                <div class="card" style="text-align: center;">
+                                    <div style="font-size: 2rem; margin-bottom: 1rem;">💡</div>
+                                    <h4>Générateur d'Idées</h4>
+                                    <p style="margin-bottom: 1rem;">Trouvez de nouvelles idées de contenu basées sur vos performances</p>
+                                    <button class="btn btn-primary">Utiliser</button>
+                                </div>
+                                <div class="card" style="text-align: center;">
+                                    <div style="font-size: 2rem; margin-bottom: 1rem;">📝</div>
+                                    <h4>Rédacteur IA</h4>
+                                    <p style="margin-bottom: 1rem;">Générez des descriptions et titres optimisés</p>
+                                    <button class="btn btn-primary">Utiliser</button>
+                                </div>
+                                <div class="card" style="text-align: center;">
+                                    <div style="font-size: 2rem; margin-bottom: 1rem;">📊</div>
+                                    <h4>Analyse Avancée</h4>
+                                    <p style="margin-bottom: 1rem;">Analyses détaillées de vos performances</p>
+                                    <button class="btn btn-primary">Utiliser</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
