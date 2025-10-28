@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boîte à Idées - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="inbox.html">Messages</a></li>
+                <li><a href="connections.html">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html">📊 Dashboard</a></li>
+                        <li><a href="inbox.html">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html" class="active">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: between; align-items: center;">
+                            <div>
+                                <h1>Boîte à Idées Communautaire</h1>
+                                <p>Découvrez et partagez des idées de contenu avec la communauté</p>
+                            </div>
+                            <button class="btn btn-primary">➕ Proposer une idée</button>
+                        </div>
+
+                        <!-- Filtres -->
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                            <button class="btn btn-outline active">Toutes les idées</button>
+                            <button class="btn btn-outline">Populaires</button>
+                            <button class="btn btn-outline">Récentes</button>
+                            <button class="btn btn-outline">Gaming</button>
+                            <button class="btn btn-outline">Tech</button>
+                            <button class="btn btn-outline">Tutoriels</button>
+                            <button class="btn btn-outline">Mes favoris</button>
+                        </div>
+
+                        <!-- Liste des idées -->
+                        <div class="grid grid-2">
+                            <!-- Idée 1 -->
+                            <div class="card">
+                                <div style="display: flex; justify-content: between; align-items: flex-start; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0;">Tutoriel : Montage vidéo pour débutants</h3>
+                                    <span class="badge badge-success">125 votes</span>
+                                </div>
+                                <p style="margin-bottom: 1rem; color: var(--gray);">
+                                    Une série de vidéos expliquant les bases du montage vidéo pour les nouveaux créateurs.
+                                </p>
+                                <div style="display: flex; justify-content: between; align-items: center;">
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">👍 125</button>
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">💬 24</button>
+                                    </div>
+                                    <span style="font-size: 0.9rem; color: var(--gray);">Par @MarieC • Il y a 2 jours</span>
+                                </div>
+                            </div>
+
+                            <!-- Idée 2 -->
+                            <div class="card">
+                                <div style="display: flex; justify-content: between; align-items: flex-start; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0;">Revue de setup gaming budget</h3>
+                                    <span class="badge badge-primary">89 votes</span>
+                                </div>
+                                <p style="margin-bottom: 1rem; color: var(--gray);">
+                                    Montrer comment créer un setup gaming fonctionnel avec un budget limité.
+                                </p>
+                                <div style="display: flex; justify-content: between; align-items: center;">
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">👍 89</button>
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">💬 15</button>
+                                    </div>
+                                    <span style="font-size: 0.9rem; color: var(--gray);">Par @GamerPro • Il y a 3 jours</span>
+                                </div>
+                            </div>
+
+                            <!-- Idée 3 -->
+                            <div class="card">
+                                <div style="display: flex; justify-content: between; align-items: flex-start; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0;">Défi 30 jours de streaming</h3>
+                                    <span class="badge badge-warning">67 votes</span>
+                                </div>
+                                <p style="margin-bottom: 1rem; color: var(--gray);">
+                                    Un défi où on stream tous les jours pendant 30 jours et on documente la progression.
+                                </p>
+                                <div style="display: flex; justify-content: between; align-items: center;">
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">👍 67</button>
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">💬 32</button>
+                                    </div>
+                                    <span style="font-size: 0.9rem; color: var(--gray);">Par @StreamLife • Il y a 5 jours</span>
+                                </div>
+                            </div>
+
+                            <!-- Idée 4 -->
+                            <div class="card">
+                                <div style="display: flex; justify-content: between; align-items: flex-start; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0;">Analyse tendances TikTok</h3>
+                                    <span class="badge badge-primary">54 votes</span>
+                                </div>
+                                <p style="margin-bottom: 1rem; color: var(--gray);">
+                                    Une analyse hebdomadaire des nouvelles tendances sur TikTok et comment les utiliser.
+                                </p>
+                                <div style="display: flex; justify-content: between; align-items: center;">
+                                    <div style="display: flex; gap: 1rem;">
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">👍 54</button>
+                                        <button class="btn btn-outline" style="padding: 0.25rem 0.75rem;">💬 18</button>
+                                    </div>
+                                    <span style="font-size: 0.9rem; color: var(--gray);">Par @TikTokExpert • Il y a 1 semaine</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Idée générée par IA -->
+                        <div class="card" style="margin-top: 2rem; background: #f0f7ff;">
+                            <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                                <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">🤖</div>
+                                <div style="flex: 1;">
+                                    <h4 style="margin-bottom: 0.5rem;">Idée générée par l'IA</h4>
+                                    <p style="margin-bottom: 1rem;">Basé sur vos performances récentes, voici une idée qui pourrait bien fonctionner pour vous :</p>
+                                    <div style="background: white; padding: 1rem; border-radius: 6px;">
+                                        <h5 style="margin-bottom: 0.5rem;">"Comparaison des logiciels de montage : Premiere Pro vs DaVinci Resolve"</h5>
+                                        <p style="margin-bottom: 1rem; color: var(--gray);">
+                                            Créez une vidéo comparant les deux logiciels de montage les plus populaires, 
+                                            en montrant les avantages et inconvénients de chacun pour différents types de contenu.
+                                        </p>
+                                        <div style="display: flex; gap: 1rem;">
+                                            <button class="btn btn-primary">Utiliser cette idée</button>
+                                            <button class="btn btn-outline">Générer une autre idée</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
