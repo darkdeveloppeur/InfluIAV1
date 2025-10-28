@@ -1,13 +1,23 @@
 services:
   - type: web
     name: creator-suite-dev
-    env: static
-    buildCommand: ""
-    # COMMANDE CORRIGÉE : J'ai retiré le "-s" d'ici
+    # 1. Changer 'static' en 'node' pour exécuter des scripts
+    env: node
+    # 2. Spécifier une version de Node
+    nodeVersion: "18"
+    
+    # 3. Dire à Render comment "construire" le site
+    # Il va installer 'serve' PUIS exécuter 'npm run build' (qui lance inject-env.js)
+    buildCommand: "npm install && npm run build"
+    
+    # 4. Commande de démarrage SANS le '-s' (pour corriger les redirections)
     startCommand: "npx serve -l $PORT"
+    
     envVars:
+      # Render lira tes variables (SUPABASE_URL, etc.) automatiquement
       - key: NODE_ENV
         value: development
+      
     headers:
       - path: /*
         name: X-Frame-Options
