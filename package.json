@@ -1,0 +1,19 @@
+{
+  "name": "creator-suite",
+  "version": "1.0.0",
+  "description": "Plateforme pour créateurs de contenu - Version Développement",
+  "type": "module",
+  "scripts": {
+    "dev": "live-server --port=3000 --watch=./",
+    "start": "serve -s -l 3000"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["creators", "content", "dashboard"],
+  "author": "VotreNom",
+  "license": "MIT"
+}
