@@ -1,13 +1,23 @@
 services:
   - type: web
     name: creator-suite-dev
-    env: static
-    buildCommand: ""
-    # J'ai retiré le "-s" d'ici pour désactiver le mode SPA
+    # Changer 'static' en 'node'
+    env: node
+    # S'assurer qu'il utilise une version de Node qui supporte 'import'
+    nodeVersion: "18"
+    
+    # Commande pour installer les dépendances (serve)
+    buildCommand: "npm install && npm run build"
+    
+    # COMMANDE CORRIGÉE : J'ai retiré le '-s' pour que tes pages fonctionnent
     startCommand: "npx serve -l $PORT"
+    
     envVars:
       - key: NODE_ENV
         value: development
+      # Render lira automatiquement tes variables d'environnement
+      # SUPABASE_URL et SUPABASE_KEY ici
+      
     headers:
       - path: /*
         name: X-Frame-Options
