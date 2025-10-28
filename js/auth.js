@@ -2,13 +2,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =================================================================
-    // 1. METS TES CLÉS SUPABASE ICI
-    // =================================================================
-    // Tu trouves ces infos dans : Paramètres > API de ton projet Supabase
-    
-    const SUPABASE_URL = https://wzsugtpvexzrompgawsj.supabase.co; // Colle ton URL ici
-    const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6c3VndHB2ZXh6cm9tcGdhd3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2NTUxNTQsImV4cCI6MjA3NzIzMTE1NH0.vyykHppP0b1QgxFGp5slxPfewdL_YIcmJggtOMhnCzA; // Colle ta clé 'anon' 'public' ici
-
+    // CES VALEURS SERONT REMPLACÉES PAR RENDER PENDANT LE BUILD
+    const SUPABASE_URL = '__SUPABASE_URL__';
+    const SUPABASE_KEY = '__SUPABASE_KEY__';
     // =================================================================
 
     // Initialiser le client Supabase
@@ -16,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     } catch (e) {
-        console.error('Erreur: Supabase n\'est pas chargé. As-tu mis tes clés ?', e);
-        // Si les clés sont mauvaises, on arrête tout
-        if (!SUPABASE_URL || SUPABASE_URL === 'TON_URL_SUPABASE') {
-            alert('ERREUR : Les clés Supabase ne sont pas configurées dans js/auth.js !');
-        }
+        console.error('Erreur: Supabase n\'est pas chargé.', e);
         return; 
+    }
+    
+    // Si les placeholders sont toujours là, c'est que le build a échoué
+    if (SUPABASE_URL.startsWith('__')) {
+        console.error('ERREUR : Les clés Supabase n\'ont pas été injectées. Le build a échoué.');
+        alert('Erreur critique de configuration. Contactez l\'administrateur.');
+        return;
     }
 
     // Gérer l'inscription (signup.html)
@@ -29,19 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
             const fullName = document.getElementById('signup-name').value;
-
             const submitButton = signupForm.querySelector('button[type="submit"]');
             submitButton.textContent = 'Création en cours...';
             submitButton.disabled = true;
 
-            // ÉTAPE 1 : Inscrire l'utilisateur (Auth)
             const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password,
+                email: email, password: password,
             });
 
             if (error) {
@@ -49,21 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.textContent = 'Créer mon compte';
                 submitButton.disabled = false;
             } else if (data.user) {
-                // ÉTAPE 2 : Insérer le profil dans la base de données (Database)
                 const { error: profileError } = await supabase
                     .from('profiles')
-                    .insert([
-                        { 
-                            id: data.user.id,
-                            full_name: fullName
-                        }
-                    ]);
+                    .insert([{ id: data.user.id, full_name: fullName }]);
                 
                 if (profileError) {
                      alert(`Erreur lors de la création du profil : ${profileError.message}`);
                 }
-                
-                // Succès - Redirection
                 alert('Inscription réussie ! Redirection...');
                 window.location.href = 'dashboard.html';
             }
@@ -75,17 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault(); 
-
             const email = loginForm.querySelector('input[type="email"]').value;
             const password = loginForm.querySelector('input[type="password"]').value;
-
             const submitButton = loginForm.querySelector('button[type="submit"]');
             submitButton.textContent = 'Connexion en cours...';
             submitButton.disabled = true;
 
             const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
+                email: email, password: password,
             });
 
             if (error) {
@@ -93,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.textContent = 'Se connecter';
                 submitButton.disabled = false;
             } else {
-                alert('Connexion réussie ! Redirection vers le tableau de bord...');
+                alert('Connexion réussie ! Redirection...');
                 window.location.href = 'dashboard.html';
             }
         });
@@ -104,15 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (forgotPasswordForm) {
         forgotPasswordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const email = document.getElementById('forgot-email').value;
             const submitButton = forgotPasswordForm.querySelector('button[type="submit"]');
             submitButton.textContent = 'Envoi en cours...';
             submitButton.disabled = true;
 
-            //
-            // J'AI MIS TON URL RENDER CI-DESSOUS
-            //
             const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
                 redirectTo: 'https://influiav1-1.onrender.com/reset-password.html'
             });
@@ -122,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 alert('Email de réinitialisation envoyé ! Vérifiez votre boîte de réception.');
             }
-            
             submitButton.textContent = 'Envoyer le lien';
             submitButton.disabled = false;
         });
