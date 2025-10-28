@@ -3,7 +3,8 @@ services:
     name: creator-suite-dev
     env: static
     buildCommand: ""
-    startCommand: "npx serve -s -l $PORT"
+    # J'ai retiré le "-s" d'ici pour désactiver le mode SPA
+    startCommand: "npx serve -l $PORT"
     envVars:
       - key: NODE_ENV
         value: development
