@@ -1,16 +1,26 @@
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', () => {
 
-    // IMPORTANT : Remplace ces valeurs par tes propres clés Supabase !
-    const SUPABASE_URL = 'TON_URL_SUPABASE'; // Mets ton URL ici
-    const SUPABASE_KEY = 'TA_CLE_PUBLIQUE_ANON'; // Mets ta clé ici
+    // =================================================================
+    // 1. METS TES CLÉS SUPABASE ICI
+    // =================================================================
+    // Tu trouves ces infos dans : Paramètres > API de ton projet Supabase
+    
+    const SUPABASE_URL = https://wzsugtpvexzrompgawsj.supabase.co; // Colle ton URL ici
+    const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6c3VndHB2ZXh6cm9tcGdhd3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2NTUxNTQsImV4cCI6MjA3NzIzMTE1NH0.vyykHppP0b1QgxFGp5slxPfewdL_YIcmJggtOMhnCzA; // Colle ta clé 'anon' 'public' ici
+
+    // =================================================================
 
     // Initialiser le client Supabase
     let supabase;
     try {
         supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     } catch (e) {
-        console.error('Erreur: Supabase n\'est pas chargé.', e);
+        console.error('Erreur: Supabase n\'est pas chargé. As-tu mis tes clés ?', e);
+        // Si les clés sont mauvaises, on arrête tout
+        if (!SUPABASE_URL || SUPABASE_URL === 'TON_URL_SUPABASE') {
+            alert('ERREUR : Les clés Supabase ne sont pas configurées dans js/auth.js !');
+        }
         return; 
     }
 
@@ -89,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // NOUVEAU BLOC : Gérer le mot de passe oublié (forgot-password.html)
+    // Gérer le mot de passe oublié (forgot-password.html)
     const forgotPasswordForm = document.getElementById('forgot-password-form');
     if (forgotPasswordForm) {
         forgotPasswordForm.addEventListener('submit', async (e) => {
@@ -100,9 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Envoi en cours...';
             submitButton.disabled = true;
 
-            // Appel de la fonction Supabase
+            //
+            // J'AI MIS TON URL RENDER CI-DESSOUS
+            //
             const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: 'https://ton-site-sur-render.com/reset-password.html' // URL où l'utilisateur atterrira
+                redirectTo: 'https://influiav1-1.onrender.com/reset-password.html'
             });
 
             if (error) {
