@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="inbox.html">Messages</a></li>
+                <li><a href="connections.html">Connexions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html" class="active">📊 Dashboard</a></li>
+                        <li><a href="inbox.html">💬 Smart Inbox</a></li>
+                        <li><a href="connections.html">🔗 Mes Connexions</a></li>
+                        <li><a href="integration-guide.html">🛠️ Guide d'Intégration</a></li>
+                        <li><a href="link-bio.html">🌐 Link-in-Bio</a></li>
+                        <li><a href="ideas.html">💡 Boîte à Idées</a></li>
+                        <li><a href="profile.html">👤 Mon Profil</a></li>
+                        <li><a href="subscription.html">💎 Mon Abonnement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <!-- En-tête -->
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 2rem;">
+                        <h1>Tableau de Bord</h1>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn btn-outline">📊 Rapport Hebdomadaire</button>
+                            <button class="btn btn-primary">➕ Nouveau Contenu</button>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques -->
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <span class="stat-number" id="followers">12.4K</span>
+                            <span class="stat-label">Abonnés</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="engagement">4.2%</span>
+                            <span class="stat-label">Taux d'engagement</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="views">156K</span>
+                            <span class="stat-label">Vues totales</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="revenue">€245</span>
+                            <span class="stat-label">Revenus ce mois</span>
+                        </div>
+                    </div>
+
+                    <!-- Contenu récent et activité -->
+                    <div class="grid grid-2">
+                        <!-- Contenu récent -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Contenu Récent</h3>
+                            </div>
+                            <div style="max-height: 400px; overflow-y: auto;">
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: #ff0000; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">YT</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">Nouveau tutoriel publié</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">YouTube • Il y a 2 heures</div>
+                                    </div>
+                                    <span class="badge badge-success">1.2K vues</span>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: #9146ff; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">TW</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">Stream en direct</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">Twitch • Il y a 5 heures</div>
+                                    </div>
+                                    <span class="badge badge-primary">En direct</span>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: #000000; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">TT</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600;">Viral TikTok</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">TikTok • Il y a 1 jour</div>
+                                    </div>
+                                    <span class="badge badge-success">45K vues</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activité récente -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Activité Récente</h3>
+                            </div>
+                            <div style="max-height: 400px; overflow-y: auto;">
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <div style="font-weight: 600;">Nouveau follower sur YouTube</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray);">Il y a 30 minutes</div>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <div style="font-weight: 600;">Commentaire sur votre dernière vidéo</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray);">Il y a 2 heures</div>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <div style="font-weight: 600;">Vidéo recommandée par l'IA</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray);">Il y a 4 heures</div>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                                    <div style="font-weight: 600;">Nouvelle idée générée</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray);">Il y a 6 heures</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions rapides -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Actions Rapides</h3>
+                        </div>
+                        <div class="grid grid-4">
+                            <button class="btn btn-outline">📝 Rédiger un post</button>
+                            <button class="btn btn-outline">🎨 Créer une miniature</button>
+                            <button class="btn btn-outline">💡 Générer une idée</button>
+                            <button class="btn btn-outline">📊 Voir l'analyse</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
