@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - CreatorSuite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CreatorSuite</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn btn-outline">Mon Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Sidebar Admin -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="#overview" class="active">📊 Aperçu</a></li>
+                        <li><a href="#users">👥 Utilisateurs</a></li>
+                        <li><a href="#subscriptions">💎 Abonnements</a></li>
+                        <li><a href="#content">📝 Contenu</a></li>
+                        <li><a href="#analytics">📈 Analytics</a></li>
+                        <li><a href="#settings">⚙️ Paramètres</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contenu principal -->
+                <div>
+                    <!-- En-tête -->
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: between; align-items: center;">
+                            <h1>Panel d'Administration</h1>
+                            <div style="display: flex; gap: 1rem;">
+                                <button class="btn btn-outline">🔄 Actualiser</button>
+                                <button class="btn btn-primary">📊 Exporter les données</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques globales -->
+                    <div class="stats-container" style="margin: 2rem 0;">
+                        <div class="stat-card">
+                            <span class="stat-number">1,247</span>
+                            <span class="stat-label">Utilisateurs totaux</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">€4,856</span>
+                            <span class="stat-label">MRR</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">86%</span>
+                            <span class="stat-label">Taux de rétention</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">324</span>
+                            <span class="stat-label">Nouveaux (30j)</span>
+                        </div>
+                    </div>
+
+                    <!-- Aperçu -->
+                    <div id="overview">
+                        <div class="grid grid-2" style="gap: 2rem;">
+                            <!-- Utilisateurs récents -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Utilisateurs Récents</h3>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Utilisateur</th>
+                                            <th>Plan</th>
+                                            <th>Date d'inscription</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@nouveaucreateur</td>
+                                            <td><span class="badge badge-primary">Créateur</span></td>
+                                            <td>Aujourd'hui</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@gamergirl</td>
+                                            <td><span class="badge badge-success">Starter</span></td>
+                                            <td>Hier</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@techmaster</td>
+                                            <td><span class="badge badge-warning">Pro</span></td>
+                                            <td>Il y a 2 jours</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@artiste</td>
+                                            <td><span class="badge" style="background: var(--gray); color: white;">Gratuit</span></td>
+                                            <td>Il y a 3 jours</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Statistiques d'abonnement -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Répartition des Abonnements</h3>
+                                </div>
+                                <div style="padding: 1rem;">
+                                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem; padding: 0.5rem; background: #f8f9fa; border-radius: 6px;">
+                                        <span>Gratuit</span>
+                                        <span>642 utilisateurs</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem; padding: 0.5rem; background: #f8f9fa; border-radius: 6px;">
+                                        <span>Starter</span>
+                                        <span>324 utilisateurs</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem; padding: 0.5rem; background: #f8f9fa; border-radius: 6px;">
+                                        <span>Créateur</span>
+                                        <span>215 utilisateurs</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: between; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 6px;">
+                                        <span>Pro</span>
+                                        <span>66 utilisateurs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activité récente -->
+                        <div class="card" style="margin-top: 2rem;">
+                            <div class="card-header">
+                                <h3>Activité Récente du Système</h3>
+                            </div>
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">✓</div>
+                                    <div style="flex: 1;">
+                                        <div>Nouvel utilisateur inscrit</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">@nouveaucreateur • Il y a 15 min</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">€</div>
+                                    <div style="flex: 1;">
+                                        <div>Mise à niveau d'abonnement</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">@gamergirl → Plan Starter • Il y a 2 heures</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--warning); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">!</div>
+                                    <div style="flex: 1;">
+                                        <div>Échec de paiement</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">@utilisateurancien • Il y a 6 heures</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 32px; height: 32px; background: var(--danger); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">✗</div>
+                                    <div style="flex: 1;">
+                                        <div>Abonnement annulé</div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">@anciencreateur • Il y a 1 jour</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gestion des utilisateurs (caché par défaut) -->
+                    <div id="users" style="display: none;">
+                        <div class="card">
+                            <div class="card-header" style="display: flex; justify-content: between; align-items: center;">
+                                <h3>Gestion des Utilisateurs</h3>
+                                <div style="display: flex; gap: 1rem;">
+                                    <input type="text" class="form-control" placeholder="Rechercher un utilisateur..." style="width: 300px;">
+                                    <button class="btn btn-primary">➕ Ajouter un utilisateur</button>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Utilisateur</th>
+                                        <th>Email</th>
+                                        <th>Plan</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#1001</td>
+                                        <td>@monnomcreatif</td>
+                                        <td>contact@monnomcreatif.com</td>
+                                        <td><span class="badge badge-primary">Créateur</span></td>
+                                        <td><span class="badge badge-success">Actif</span></td>
+                                        <td>
+                                            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">✏️</button>
+                                            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;">👁️</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Plus d'utilisateurs... -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Navigation admin
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Masquer toutes les sections
+                document.querySelectorAll('[id]').forEach(section => {
+                    if (['overview', 'users', 'subscriptions', 'content', 'analytics', 'settings'].includes(section.id)) {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Afficher la section cible
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Mettre à jour la navigation active
+                document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
