@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // IMPORTANT : Remplace ces valeurs par tes propres clés Supabase !
     // Tu les trouves dans Paramètres > API dans ton projet Supabase
-    const SUPABASE_URL = 'TON_URL_SUPABASE'; 
-    const SUPABASE_KEY = 'TA_CLE_PUBLIQUE_ANON';
+    const SUPABASE_URL = https://wzsugtpvexzrompgawsj.supabase.co; 
+    const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6c3VndHB2ZXh6cm9tcGdhd3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2NTUxNTQsImV4cCI6MjA3NzIzMTE1NH0.vyykHppP0b1QgxFGp5slxPfewdL_YIcmJggtOMhnCzA ;
 
     // Initialiser le client Supabase
     // (Cette variable 'supabase' est chargée par le script CDN que nous ajoutons au HTML)
