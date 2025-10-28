@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "live-server --port=3000 --watch=./",
-    "start": "serve -s -l 3000"
+    "start": "serve -s -l 3000",
+    "build": "node inject-env.js"
   },
   "dependencies": {
     "serve": "^14.0.0"
