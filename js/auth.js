@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // IMPORTANT : Remplace ces valeurs par tes propres clés Supabase !
-    // Tu les trouves dans Paramètres > API dans ton projet Supabase
     const SUPABASE_URL = 'TON_URL_SUPABASE'; // Mets ton URL ici
     const SUPABASE_KEY = 'TA_CLE_PUBLIQUE_ANON'; // Mets ta clé ici
 
@@ -19,12 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Empêcher le rechargement de la page
+            e.preventDefault();
             
-            // Récupérer les valeurs grâce aux IDs
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
-            const fullName = document.getElementById('signup-name').value; // NOUVEAU
+            const fullName = document.getElementById('signup-name').value;
 
             const submitButton = signupForm.querySelector('button[type="submit"]');
             submitButton.textContent = 'Création en cours...';
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (error) {
-                // S'il y a une erreur
                 alert(`Erreur lors de l'inscription : ${error.message}`);
                 submitButton.textContent = 'Créer mon compte';
                 submitButton.disabled = false;
@@ -47,22 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     .from('profiles')
                     .insert([
                         { 
-                            id: data.user.id, // Lier au compte auth
-                            full_name: fullName // Stocker le nom complet
+                            id: data.user.id,
+                            full_name: fullName
                         }
                     ]);
                 
                 if (profileError) {
                      alert(`Erreur lors de la création du profil : ${profileError.message}`);
-                     // L'utilisateur est créé mais le profil a échoué.
-                     // On le laisse quand même se connecter.
-                     window.location.href = 'dashboard.html';
-                } else {
-                    // Succès complet !
-                    alert('Inscription réussie ! Redirection...');
-                    // Puisque la vérif email est OFF, on redirige direct au dashboard
-                    window.location.href = 'dashboard.html';
                 }
+                
+                // Succès - Redirection
+                alert('Inscription réussie ! Redirection...');
+                window.location.href = 'dashboard.html';
             }
         });
     }
@@ -73,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault(); 
 
-            // Utiliser les IDs pour être plus précis (facultatif mais propre)
             const email = loginForm.querySelector('input[type="email"]').value;
             const password = loginForm.querySelector('input[type="password"]').value;
 
@@ -94,6 +86,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Connexion réussie ! Redirection vers le tableau de bord...');
                 window.location.href = 'dashboard.html';
             }
+        });
+    }
+
+    // NOUVEAU BLOC : Gérer le mot de passe oublié (forgot-password.html)
+    const forgotPasswordForm = document.getElementById('forgot-password-form');
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('forgot-email').value;
+            const submitButton = forgotPasswordForm.querySelector('button[type="submit"]');
+            submitButton.textContent = 'Envoi en cours...';
+            submitButton.disabled = true;
+
+            // Appel de la fonction Supabase
+            const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: 'https://ton-site-sur-render.com/reset-password.html' // URL où l'utilisateur atterrira
+            });
+
+            if (error) {
+                alert(`Erreur lors de l'envoi : ${error.message}`);
+            } else {
+                alert('Email de réinitialisation envoyé ! Vérifiez votre boîte de réception.');
+            }
+            
+            submitButton.textContent = 'Envoyer le lien';
+            submitButton.disabled = false;
         });
     }
 });
