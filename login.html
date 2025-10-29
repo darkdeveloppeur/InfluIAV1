@@ -3,79 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - CreatorSuite</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/components.css">
-</head>
+    <title>Connexion</title>
+    </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">CreatorSuite</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="pricing.html">Tarifs</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-outline">Connexion</a>
-                <a href="signup.html" class="btn btn-primary">Inscription</a>
-            </div>
-        </div>
-    </nav>
 
-    <div class="main-content">
-        <div class="container">
-            <div style="max-width: 400px; margin: 3rem auto; padding: 2rem;">
-                <div class="card">
-                    <div class="card-header" style="text-align: center;">
-                        <h2>Connexion</h2>
-                        <p style="color: var(--gray); margin-top: 0.5rem;">Accédez à votre compte</p>
-                    </div>
-                    
-                    <form id="login-form">
-                        <div class="form-group">
-                            <label class="form-label">Adresse email</label>
-                            <input type="email" class="form-control" placeholder="votre@email.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" placeholder="Votre mot de passe" required>
-                        </div>
-                        
-                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
-                            <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox"> Se souvenir de moi
-                            </label>
-                            <a href="forgot-password.html" style="font-size: 0.9rem;">Mot de passe oublié?</a>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Se connecter</button>
-                    </form>
-                    
-                    <div style="text-align: center; margin: 1.5rem 0;">
-                        <div style="height: 1px; background: #eee; margin: 1.5rem 0;"></div>
-                        <p style="color: var(--gray); margin-bottom: 1rem;">Ou connectez-vous avec</p>
-                        <div style="display: flex; gap: 1rem; justify-content: center;">
-                            <button type="button" id="google-login-btn" class="btn btn-outline" style="flex: 1;">Google</button>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <p>Pas encore de compte? <a href="signup.html">Créer un compte</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h2>Connexion</h2>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+    <form id="login-form">
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
         </div>
-    </footer>
+        <br>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <br>
+        <button type="submit">Se connecter</button>
+    </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/main.js"></script>
-    <script src="js/auth.js"></script>
+    <p>Pas encore de compte ? <a href="signup.html">Inscrivez-vous</a></p>
+    <p><a href="forgot-password.html">Mot de passe oublié ?</a></p>
+
 </body>
 </html>
