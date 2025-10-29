@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-// On cible les fichiers à la racine
+// On cible les fichiers originaux à la racine
 const authFilePath = path.join(process.cwd(), 'js', 'auth.js');
 const mainFilePath = path.join(process.cwd(), 'js', 'main.js');
 
@@ -30,6 +30,6 @@ function injectKeys(filePath) {
     }
 }
 
-// Injecter dans les deux fichiers
+// Injecter dans les deux fichiers originaux
 injectKeys(authFilePath);
 injectKeys(mainFilePath);
