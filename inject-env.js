@@ -1,10 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-// Chemin vers le NOUVEAU dossier 'dist'
-const distDir = path.join(process.cwd(), 'dist');
-const authFilePath = path.join(distDir, 'js', 'auth.js');
-const mainFilePath = path.join(distDir, 'js', 'main.js');
+// On cible les fichiers à la racine
+const authFilePath = path.join(process.cwd(), 'js', 'auth.js');
+const mainFilePath = path.join(process.cwd(), 'js', 'main.js');
 
 // Récupérer les variables d'environnement
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -15,7 +14,7 @@ if (!supabaseUrl || !supabaseKey) {
     process.exit(1);
 }
 
-// Fonction pour injecter les clés dans un fichier
+// Fonction pour injecter les clés
 function injectKeys(filePath) {
     try {
         let fileContent = fs.readFileSync(filePath, 'utf8');
@@ -31,6 +30,6 @@ function injectKeys(filePath) {
     }
 }
 
-// Injecter dans les deux fichiers (dans 'dist')
+// Injecter dans les deux fichiers
 injectKeys(authFilePath);
 injectKeys(mainFilePath);
