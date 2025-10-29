@@ -1,21 +1,13 @@
 services:
   - type: web
-    name: creator-suite-dev
-    # 1. On DIT à Render que c'est un projet Node
-    env: node
-    nodeVersion: "18"
-    
-    # 2. On DIT à Render comment "builder" le site
-    #    Il va installer les dépendances (yarn) PUIS lancer le script "build"
-    buildCommand: "yarn install && yarn run build"
-    
-    # 3. On DIT à Render comment démarrer le serveur
-    startCommand: "yarn start"
-    
+    name: InfluIAV1 # Ou le nom que tu as choisi
+    env: node # On garde node pour utiliser 'serve'
+    plan: free # Important pour le $PORT
+    buildCommand: "yarn install" # Juste installer 'serve'
+    startCommand: "yarn start" # Lance le script 'start' de package.json
     envVars:
       - key: NODE_ENV
         value: development
-      
     headers:
       - path: /*
         name: X-Frame-Options
