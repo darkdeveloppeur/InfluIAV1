@@ -18,48 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // NOUVELLE FONCTION : Crée un profil s'il n'existe pas
-    // C'est ce que le trigger faisait, mais en JS c'est plus sûr
-    async function createProfileIfNotExists(user) {
-        // 1. On vérifie d'abord si un profil existe
-        const { data, error: selectError } = await supabaseClient
+    // Fonction pour créer un profil (utilisée par l'inscription email)
+    async function createProfileForEmailUser(user, fullName) {
+        const { data, error } = await supabaseClient
             .from('profiles')
-            .select('id')
-            .eq('id', user.id)
-            .single(); // On ne veut qu'un seul résultat
-
-        if (selectError && selectError.code !== 'PGRST116') {
-            // PGRST116 = "le profil n'existe pas", ce qui est normal
-            console.error('Erreur en vérifiant le profil:', selectError);
-            return; // On arrête
-        }
-
-        // 2. Si 'data' est null, le profil n'existe pas, on le crée
-        if (!data) {
-            console.log('Profil non trouvé. Création du profil...');
-            
-            // On essaie de récupérer le nom depuis Google
-            const userFullName = user.user_metadata?.full_name || 'Nouveau Créateur';
-
-            const { error: insertError } = await supabaseClient
-                .from('profiles')
-                .insert({ 
-                    id: user.id, 
-                    full_name: userFullName 
-                });
-
-            if (insertError) {
-                console.error('Erreur en créant le profil:', insertError);
-            } else {
-                console.log('Profil créé avec succès.');
-            }
-        } else {
-            console.log('Le profil existe déjà.');
+            .insert({ id: user.id, full_name: fullName });
+        if (error) {
+            console.error('Erreur en créant le profil:', error);
         }
     }
 
 
-    // Gérer l'inscription (signup.html) - SANS TRIGGER
+    // Gérer l'inscription (signup.html)
     const signupForm = document.getElementById('signup-form');
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
@@ -73,13 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const { data, error } = await supabaseClient.auth.signUp({
                 email: email, 
-                password: password,
-                // On passe le nom pour que notre fonction JS puisse le lire
-                options: {
-                    data: {
-                        full_name: fullName 
-                    }
-                }
+                password: password
+                // Note: On n'envoie plus 'options: data' car on le fait manuellement
             });
 
             if (error) {
@@ -88,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.disabled = false;
             } else if (data.user) {
                 // L'inscription a réussi. On crée le profil manuellement.
-                await createProfileIfNotExists(data.user);
+                await createProfileForEmailUser(data.user, fullName);
                 alert('Inscription réussie ! Redirection...');
                 window.location.href = 'dashboard.html';
             }
@@ -115,18 +80,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.textContent = 'Se connecter';
                 submitButton.disabled = false;
             } else if (data.user) {
-                // Connexion réussie. On vérifie/crée le profil au cas où.
-                await createProfileIfNotExists(data.user);
+                // Connexion réussie.
+                // Pas besoin de createProfile, le listener dans main.js s'en charge.
                 alert('Connexion réussie ! Redirection...');
                 window.location.href = 'dashboard.html';
             }
         });
     }
 
-    // Gérer le mot de passe oublié
+    // Gérer le mot de passe oublié (forgot-password.html)
     const forgotPasswordForm = document.getElementById('forgot-password-form');
     if (forgotPasswordForm) {
-        // ... (code inchangé) ...
+        forgotPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('forgot-email').value;
+            const submitButton = forgotPasswordForm.querySelector('button[type="submit"]');
+            submitButton.textContent = 'Envoi en cours...';
+            submitButton.disabled = true;
+
+            const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+                redirectTo: 'https://influiav1.onrender.com/reset-password.html'
+            });
+
+            if (error) {
+                alert(`Erreur lors de l'envoi : ${error.message}`);
+            } else {
+                alert('Email de réinitialisation envoyé ! Vérifiez votre boîte de réception.');
+            }
+            submitButton.textContent = 'Envoyer le lien';
+            submitButton.disabled = false;
+        });
     }
 
     // Connexion Google
@@ -149,18 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
         googleSignupBtn.addEventListener('click', signInWithGoogle);
     }
 
-    // GESTION DE LA REDIRECTION GOOGLE
-    // C'est ce qui va créer le profil après le retour de Google
-    supabaseClient.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' && session?.user) {
-            console.log('Utilisateur connecté après redirection Google.');
-            // On vérifie/crée le profil
-            createProfileIfNotExists(session.user).then(() => {
-                // Et on redirige vers le dashboard
-                console.log('Redirection vers le dashboard...');
-                window.location.href = 'dashboard.html';
-            });
-        }
-    });
+    // LE LISTENER onAuthStateChange A ÉTÉ SUPPRIMÉ D'ICI
     
 });
