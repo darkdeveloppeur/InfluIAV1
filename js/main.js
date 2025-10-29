@@ -3,6 +3,8 @@ const SUPABASE_URL = '__SUPABASE_URL__';
 const SUPABASE_KEY = '__SUPABASE_KEY__';
 
 let supabaseClient;
+let initialCheckDone = false; // Pour éviter les boucles
+
 try {
     if (SUPABASE_URL.startsWith('__')) {
         throw new Error('Les clés Supabase n\'ont pas été injectées !');
@@ -10,13 +12,11 @@ try {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 } catch (e) {
     console.error('Erreur Init Supabase (main.js):', e.message);
-    // Pas d'alerte ici, on ne veut pas bloquer les pages publiques
 }
 
-// Fonction pour créer un profil (appelée après redirection Google)
+// Fonction pour créer un profil
 async function createProfileIfNotExists(user) {
     if (!supabaseClient) return; 
-
     const { data, error: selectError } = await supabaseClient
         .from('profiles').select('id').eq('id', user.id).single();
     if (selectError && selectError.code !== 'PGRST116') { 
@@ -32,82 +32,77 @@ async function createProfileIfNotExists(user) {
     } else console.log('Profil déjà là.');
 }
 
+// Fonction pour vérifier l'état et rediriger
+async function handleAuthState(session) {
+    if (initialCheckDone) return; // Si on a déjà vérifié, on arrête pour éviter les boucles
+    initialCheckDone = true; // Marquer comme vérifié
 
-// Listener global qui gère la connexion ET la redirection Google
-if (supabaseClient) {
-    supabaseClient.auth.onAuthStateChange(async (event, session) => {
-        // Détecte si l'utilisateur vient de se connecter (email ou Google)
-        if (event === 'SIGNED_IN' && session?.user) {
-            console.log('EVENT: SIGNED_IN détecté');
-            await createProfileIfNotExists(session.user);
-            
-            // Redirige vers le dashboard SI on n'y est pas déjà
-            // et si on est sur une page publique
-            const path = window.location.pathname;
-            const isOnPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html'].includes(path);
-            const isOnDashboard = path.includes('dashboard.html');
+    const path = window.location.pathname;
+    const isPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html', '/reset-password.html'].some(p => path.endsWith(p));
+    const isDashboard = path.endsWith('/dashboard.html');
 
-            if (!isOnDashboard && isOnPublicPage) {
-                 console.log('Redirection vers dashboard...');
-                 window.location.href = 'dashboard.html';
-            } else {
-                 console.log('Déjà connecté ou sur une page privée. Pas de redirection.');
-            }
-        } 
-        // Gère la déconnexion (on ajoutera un bouton plus tard)
-        else if (event === 'SIGNED_OUT') {
-            console.log('EVENT: SIGNED_OUT détecté');
-             // Redirige vers l'accueil si on est sur une page privée
-            const path = window.location.pathname;
-            const isOnPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html'].includes(path);
-            if (!isOnPublicPage) {
-                console.log('Redirection vers accueil...');
-                window.location.href = 'index.html';
-            }
+    if (session) { // Utilisateur connecté
+        console.log('Utilisateur connecté détecté.');
+        await createProfileIfNotExists(session.user);
+        // Si connecté et sur une page publique (sauf l'accueil), rediriger vers dashboard
+        if (isPublicPage && path !== '/' && path !== '/index.html') {
+             console.log('Connecté sur page publique -> dashboard');
+             window.location.replace('dashboard.html'); // Utilise replace pour éviter l'historique
+        } else if (!isPublicPage && !isDashboard) {
+             // Sécurité: Si connecté mais sur une URL privée invalide ? Rediriger vers dashboard.
+             console.log('Connecté sur page privée inconnue -> dashboard');
+             window.location.replace('dashboard.html');
+        } else {
+             console.log('Connecté, pas de redirection nécessaire.');
         }
+    } else { // Utilisateur déconnecté
+        console.log('Utilisateur déconnecté détecté.');
+        // Si déconnecté et essaie d'accéder à une page privée, rediriger vers login
+        if (!isPublicPage) {
+            console.log('Déconnecté sur page privée -> login');
+            window.location.replace('login.html'); // Utilise replace
+        } else {
+            console.log('Déconnecté, pas de redirection nécessaire.');
+        }
+    }
+     // Réactiver les vérifications après un court délai pour gérer les changements d'état
+    setTimeout(() => { initialCheckDone = false; }, 500);
+}
+
+// Listener global + Vérification initiale
+if (supabaseClient) {
+    // Écoute les changements (connexion, déconnexion)
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+        console.log(`Auth Event: ${event}`);
+        handleAuthState(session); // Gère l'état actuel
     });
 
-     // Vérifie l'état initial au chargement de la page (important pour Google)
+    // Vérifie l'état au chargement de la page
     supabaseClient.auth.getSession().then(({ data: { session } }) => {
-        if (session) {
-            console.log('Session active trouvée au chargement.');
-            // Déclenche manuellement le listener pour gérer la redirection si nécessaire
-             supabaseClient.auth.setSession(session); 
-        } else {
-            console.log('Pas de session active au chargement.');
-            // Si pas de session et on est sur une page privée, rediriger vers login
-             const path = window.location.pathname;
-             const isOnPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html'].includes(path);
-             if (!isOnPublicPage && !path.includes('reset-password.html')) { // Sauf pour reset password
-                 console.log('Accès non autorisé, redirection vers login...');
-                 window.location.href = 'login.html';
-             }
-        }
+        console.log('Vérification session initiale.');
+        handleAuthState(session);
+    }).catch(error => {
+        console.error("Erreur getSession:", error);
+        handleAuthState(null); // Traiter comme déconnecté en cas d'erreur
     });
 
 } else {
-     console.warn('Supabase client non initialisé dans main.js. Authentification désactivée.');
-     // Si pas de Supabase et on est sur une page privée, rediriger vers login
-     const path = window.location.pathname;
-     const isOnPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html'].includes(path);
-      if (!isOnPublicPage && !path.includes('reset-password.html')) {
-          console.log('Accès non autorisé (Supabase absent), redirection vers login...');
-          window.location.href = 'login.html';
-      }
+     console.warn('Supabase client non initialisé. Authentification désactivée.');
+     handleAuthState(null); // Traiter comme déconnecté
 }
 
 
 // --- Ton ancien code main.js (inchangé à partir d'ici) ---
 document.addEventListener('DOMContentLoaded', function() {
     // Gestion nav active
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html'; // Default to index
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html'; 
     const navLinks = document.querySelectorAll('.nav-links a, .sidebar-menu a');
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href').split('/').pop() || 'index.html';
         if (linkHref === currentPage) {
             link.classList.add('active');
         } else {
-            link.classList.remove('active'); // Assure que seul le bon est actif
+            link.classList.remove('active'); 
         }
     });
     
@@ -126,6 +121,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function simulateDashboardData() { /* ... */ }
-function toggleSection(sectionId) { /* ... */ }
+function simulateDashboardData() { 
+    const stats = [
+        { id: 'followers', value: '12.4K' }, { id: 'engagement', value: '4.2%' },
+        { id: 'views', value: '156K' }, { id: 'revenue', value: '€245' }
+    ];
+    stats.forEach(stat => {
+        const element = document.getElementById(stat.id);
+        if (element) element.textContent = stat.value;
+    });
+ }
+function toggleSection(sectionId) { 
+    const section = document.getElementById(sectionId);
+    if (section) section.style.display = section.style.display === 'none' ? 'block' : 'none';
+ }
 function showLoading() { /* ... */ }
