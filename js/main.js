@@ -3,7 +3,6 @@ const SUPABASE_URL = '__SUPABASE_URL__';
 const SUPABASE_KEY = '__SUPABASE_KEY__';
 
 let supabaseClient;
-let initialCheckDone = false; 
 
 try {
     if (SUPABASE_URL.startsWith('__')) {
@@ -14,60 +13,55 @@ try {
     console.error('Erreur Init Supabase (main.js):', e.message);
 }
 
-// Fonction pour vérifier l'état et rediriger (SIMPLIFIÉE)
-function handleAuthStateRedirect(session) {
-    if (initialCheckDone) return; 
-    initialCheckDone = true; 
-
-    const path = window.location.pathname;
-    const isPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html', '/reset-password.html'].some(p => path.endsWith(p));
-    
-    console.log(`Vérification Auth: Connecté=${!!session}, Page Publique=${isPublicPage}, Path=${path}`);
-
-    if (session) { // Utilisateur connecté
-        // Si connecté et sur une page publique (sauf l'accueil), rediriger vers dashboard
-        if (isPublicPage && path !== '/' && path !== '/index.html') {
-             console.log('Connecté sur page publique -> dashboard');
-             window.location.replace('dashboard.html'); 
-        } else {
-             console.log('Connecté, pas de redirection.');
-        }
-    } else { // Utilisateur déconnecté
-        // Si déconnecté et essaie d'accéder à une page privée, rediriger vers login
-        if (!isPublicPage) {
-            console.log('Déconnecté sur page privée -> login');
-            window.location.replace('login.html'); 
-        } else {
-            console.log('Déconnecté, pas de redirection.');
-        }
-    }
-    setTimeout(() => { initialCheckDone = false; }, 500);
-}
-
-// Listener global + Vérification initiale
+// Listener TRES simplifié : redirige UNIQUEMENT si on vient de se connecter
 if (supabaseClient) {
     supabaseClient.auth.onAuthStateChange((event, session) => {
         console.log(`Auth Event: ${event}`);
-        // ON NE CRÉE PLUS LE PROFIL ICI POUR LE TEST
-        handleAuthStateRedirect(session); 
+        // Si l'utilisateur vient de se connecter (via Google ou après redirection)
+        if (event === 'SIGNED_IN' && session?.user) {
+            const currentPath = window.location.pathname;
+            // Redirige seulement si on n'est PAS déjà sur le dashboard
+            if (!currentPath.endsWith('dashboard.html')) {
+                console.log('SIGNED_IN détecté, redirection vers dashboard...');
+                window.location.replace('dashboard.html'); // Utilise replace pour éviter l'historique
+            }
+        }
+        // NOTE: On ne gère PAS la déconnexion ou la protection des pages ici
     });
-
-    supabaseClient.auth.getSession().then(({ data: { session } }) => {
-        console.log('Vérification session initiale.');
-        handleAuthStateRedirect(session);
-    }).catch(error => {
-        console.error("Erreur getSession:", error);
-        handleAuthStateRedirect(null); 
-    });
-
 } else {
-     console.warn('Supabase client non initialisé. Authentification désactivée.');
-     handleAuthStateRedirect(null); 
+     console.warn('Supabase client non initialisé dans main.js.');
 }
 
 
 // --- Ton ancien code main.js (inchangé à partir d'ici) ---
-document.addEventListener('DOMContentLoaded', function() { /* ... */ });
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestion nav active
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html'; 
+    const navLinks = document.querySelectorAll('.nav-links a, .sidebar-menu a');
+    navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href').split('/').pop() || 'index.html';
+        if (linkHref === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active'); 
+        }
+    });
+    
+    // Simu dashboard
+    if (document.querySelector('.stats-container')) simulateDashboardData();
+    
+    // Formulaires (sauf auth)
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        if (!['login-form', 'signup-form', 'forgot-password-form'].includes(form.id)) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Fonctionnalité en dev!');
+            });
+        }
+    });
+});
+
 function simulateDashboardData() { /* ... */ }
 function toggleSection(sectionId) { /* ... */ }
 function showLoading() { /* ... */ }
