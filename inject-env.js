@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-// Chemins vers les DEUX fichiers
-const authFilePath = path.join(process.cwd(), 'js', 'auth.js');
-const mainFilePath = path.join(process.cwd(), 'js', 'main.js');
+// Chemin vers le NOUVEAU dossier 'dist'
+const distDir = path.join(process.cwd(), 'dist');
+const authFilePath = path.join(distDir, 'js', 'auth.js');
+const mainFilePath = path.join(distDir, 'js', 'main.js');
 
 // Récupérer les variables d'environnement
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -26,10 +27,10 @@ function injectKeys(filePath) {
         console.log(`Clés injectées avec succès dans ${filePath}`);
     } catch (err) {
         console.error(`Erreur: Impossible de lire/écrire dans ${filePath}`, err);
-        process.exit(1); // Arrêter le build si ça échoue
+        process.exit(1);
     }
 }
 
-// Injecter dans les deux fichiers
+// Injecter dans les deux fichiers (dans 'dist')
 injectKeys(authFilePath);
 injectKeys(mainFilePath);
