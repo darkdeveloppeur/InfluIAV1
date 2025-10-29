@@ -1,14 +1,15 @@
 services:
   - type: web
     name: creator-suite-dev
-    # 1. DOIT être 'node' pour exécuter des scripts
+    # 1. On DIT à Render que c'est un projet Node
     env: node
     nodeVersion: "18"
     
-    # 2. DOIT avoir une buildCommand pour injecter les clés
+    # 2. On DIT à Render comment "builder" le site
+    #    Il va installer les dépendances (yarn) PUIS lancer le script "build"
     buildCommand: "yarn install && yarn run build"
     
-    # 3. DOIT être 'yarn start' pour lancer ton script
+    # 3. On DIT à Render comment démarrer le serveur
     startCommand: "yarn start"
     
     envVars:
