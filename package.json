@@ -5,13 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "live-server --port=3000 --watch=./",
-    "start": "serve -l 3000 dist -s",
-    "build": "node inject-env.js && yarn build:copy",
-    "build:copy": "cpy \"**/*.{html,css,js}\" \"!node_modules/**\" \"!dist/**\" \"!inject-env.js\" \"!*.yaml\" \"!*.md\" \"!.git/**\" ../dist --cwd=./ --parents && cpy index.html ../dist --cwd=./"
+    "start": "serve -l 3000",
+    "build": "node inject-env.js"
   },
   "dependencies": {
-    "serve": "^14.0.0",
-    "cpy-cli": "^5.0.0"
+    "serve": "^14.0.0"
   },
   "devDependencies": {
     "live-server": "^1.2.2"
