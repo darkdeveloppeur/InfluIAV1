@@ -23,7 +23,7 @@ function injectKeys(filePath) {
         fileContent = fileContent.replace(/__SUPABASE_KEY__/g, supabaseKey);
         
         fs.writeFileSync(filePath, fileContent, 'utf8');
-        console.log(`Clés injectées avec succès dans ${filePath}`);
+        console.log(`Clés injectées avec succès dans ${filePath} (original)`);
     } catch (err) {
         console.error(`Erreur: Impossible de lire/écrire dans ${filePath}`, err);
         process.exit(1);
