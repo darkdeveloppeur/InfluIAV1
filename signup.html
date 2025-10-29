@@ -3,90 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - CreatorSuite</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/components.css">
-</head>
+    <title>Inscription</title>
+    </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">CreatorSuite</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="pricing.html">Tarifs</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-outline">Connexion</a>
-                <a href="signup.html" class="btn btn-primary">Inscription</a>
-            </div>
-        </div>
-    </nav>
 
-    <div class="main-content">
-        <div class="container">
-            <div style="max-width: 400px; margin: 3rem auto; padding: 2rem;">
-                <div class="card">
-                    <div class="card-header" style="text-align: center;">
-                        <h2>Inscription</h2>
-                        <p style="color: var(--gray); margin-top: 0.5rem;">Créez votre compte gratuit</p>
-                    </div>
-                    
-                    <form id="signup-form">
-                        <div class="form-group">
-                            <label class="form-label">Nom complet</label>
-                            <input type="text" id="signup-name" class="form-control" placeholder="Votre nom complet" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Adresse email</label>
-                            <input type="email" id="signup-email" class="form-control" placeholder="votre@email.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Mot de passe</label>
-                            <input type="password" id="signup-password" class="form-control" placeholder="Créez un mot de passe" required>
-                            <small style="color: var(--gray);">Minimum 8 caractères</small>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Confirmer le mot de passe</label>
-                            <input type="password" class="form-control" placeholder="Confirmez votre mot de passe" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label style="display: flex; align-items: flex-start; gap: 0.5rem;">
-                                <input type="checkbox" style="margin-top: 0.25rem;" required>
-                                <span>J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a></span>
-                            </label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Créer mon compte</button>
-                    </form>
-                    
-                    <div style="text-align: center; margin: 1.5rem 0;">
-                        <div style="height: 1px; background: #eee; margin: 1.5rem 0;"></div>
-                        <p style="color: var(--gray); margin-bottom: 1rem;">Ou inscrivez-vous avec</p>
-                        <div style="display: flex; gap: 1rem; justify-content: center;">
-                            <button type="button" id="google-signup-btn" class="btn btn-outline" style="flex: 1;">Google</button>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <p>Déjà un compte? <a href="login.html">Se connecter</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h2>Inscription</h2>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 CreatorSuite. Tous droits réservés.</p>
+    <form id="signup-form">
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
         </div>
-    </footer>
+        <br>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <br>
+         <div>
+            <label for="confirm-password">Confirmer le mot de passe :</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+        <br>
+        <button type="submit">S'inscrire</button>
+    </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/main.js"></script>
-    <script src="js/auth.js"></script>
+    <p>Déjà un compte ? <a href="login.html">Connectez-vous</a></p>
+
 </body>
 </html>
