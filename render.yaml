@@ -1,9 +1,9 @@
 services:
   - type: web
     name: InfluIAV1 # Ou le nom que tu as choisi
-    env: node # On garde node pour utiliser 'serve'
-    plan: free # Important pour le $PORT
-    buildCommand: "yarn install" # Juste installer 'serve'
+    env: node 
+    plan: free 
+    buildCommand: "yarn install && echo \"export const SUPABASE_URL = '${SUPABASE_URL}'; export const SUPABASE_KEY = '${SUPABASE_KEY}';\" > js/auth/env.js"
     startCommand: "yarn start" # Lance le script 'start' de package.json
     envVars:
       - key: NODE_ENV
