@@ -1,27 +1,13 @@
-// PLACEHOLDERS POUR L'INJECTION
-const SUPABASE_URL = '__SUPABASE_URL__';
-const SUPABASE_KEY = '__SUPABASE_KEY__';
+// On importe le client Supabase unique depuis notre fichier
+import supabaseClient from './auth/supabaseClient.js';
 
-let supabaseClient;
 let initialCheckDone = false; 
 
-try {
-    // Vérifie si les clés ont été injectées avant d'initialiser
-    if (SUPABASE_URL.startsWith('__')) {
-        throw new Error('Les clés Supabase n\'ont pas été injectées !');
-    }
-    // 'supabase' vient du script CDN global
-    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-} catch (e) {
-    console.error('Erreur Init Supabase (main.js):', e.message);
-    // Si l'initialisation échoue, l'authentification ne fonctionnera pas
-}
-
-// Fonction pour vérifier l'état et rediriger (SIMPLIFIÉE)
+// Fonction pour vérifier l'état et rediriger
 function handleAuthStateRedirect(session) {
     // Évite les exécutions multiples rapides qui peuvent causer des boucles
     if (initialCheckDone) {
-        console.log("handleAuthStateRedirect: Vérification déjà faite récemment.");
+        // console.log("handleAuthStateRedirect: Vérification déjà faite récemment.");
         return; 
     }
     initialCheckDone = true; 
