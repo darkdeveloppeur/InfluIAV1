@@ -24,3 +24,6 @@ Thumbs.db
 # Logs
 logs
 *.log
+
+# Fichier généré par Render
+js/auth/env.js
