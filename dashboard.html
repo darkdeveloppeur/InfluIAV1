@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord</title>
-    </head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
 
     <nav>
@@ -15,5 +17,19 @@
     <h2>Bienvenue !</h2>
     <p>Ceci est votre espace personnel.</p>
     
-    </body>
+    <script type="module" src="js/main.js"></script>
+
+    <script type="module">
+        // Importer la fonction de déconnexion depuis ton service
+        import { signOut } from './js/auth/authService.js';
+        
+        const logoutButton = document.getElementById('logout-button');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', () => {
+                console.log('Déconnexion...');
+                signOut();
+            });
+        }
+    </script>
+</body>
 </html>
