@@ -46,22 +46,14 @@ export async function resetPassword(email) {
      return await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo: resetURL });
 }
 
-// Vérifier la session au chargement
-// NOTE: La GESTION de la redirection est dans js/main.js
-export async function checkInitialSession() {
-     if (!supabaseClient) return null;
-     const { data: { session }, error } = await supabaseClient.auth.getSession();
-     if (error) {
-         console.error("Erreur getSession:", error);
-         return null;
-     }
-     console.log('Session initiale:', session ? 'Active' : 'Inactive');
-     return session; // Renvoie la session (ou null)
-}
+// NOTE: TOUTES LES FONCTIONS DE GESTION DE SESSION (handleAuthStateChange, checkInitialSession)
+// SONT MAINTENANT DANS js/main.js POUR ÉVITER LES CONFLITS.
 
-// Déconnexion
+// Déconnexion (gardé ici pour le bouton de déconnexion)
 export async function signOut() {
     if (!supabaseClient) return;
     await supabaseClient.auth.signOut();
-    window.location.replace("index.html"); // Redirige vers l'accueil après déconnexion
+    // La redirection sera gérée par le listener onAuthStateChange dans main.js
+    // On force quand même au cas où :
+    window.location.replace("index.html");
 }
