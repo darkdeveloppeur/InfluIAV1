@@ -1,3 +1,4 @@
+// On importe SEULEMENT les fonctions d'action (pas de gestion de session)
 import { signUpWithEmail, signInWithEmail, signInWithGoogle, resetPassword } from './authService.js';
 
 // Gérer l'inscription par Email
@@ -18,8 +19,7 @@ if (signupForm) {
             submitButton.textContent = 'Créer'; submitButton.disabled = false;
         } else {
             // La redirection est gérée par main.js
-            alert('Inscription réussie ! Veuillez patienter...');
-            // On ne redirige plus ici, on laisse le listener de main.js faire
+            alert('Inscription réussie ! Redirection...');
         }
     });
 }
@@ -41,8 +41,7 @@ if (loginForm) {
             submitButton.textContent = 'Connecter'; submitButton.disabled = false;
         } else {
              // La redirection est gérée par main.js
-            alert('Connexion réussie ! Veuillez patienter...');
-             // On ne redirige plus ici
+            alert('Connexion réussie ! Redirection...');
         }
     });
 }
@@ -52,7 +51,7 @@ const forgotPasswordForm = document.getElementById('forgot-password-form');
 if (forgotPasswordForm) {
     forgotPasswordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = document.getElementById('forgot-email').value; // J'ai corrigé l'ID ici
+        const email = document.getElementById('email').value; // ID 'email' et non 'forgot-email'
         const submitButton = forgotPasswordForm.querySelector('button[type="submit"]');
         submitButton.textContent = 'Envoi...'; submitButton.disabled = true;
 
@@ -76,8 +75,8 @@ if (googleSignupBtn) googleSignupBtn.addEventListener('click', async () => {
      if (error) alert('Erreur Google Signup: ' + error.message);
 });
 
-// ON NE MET PLUS LE LISTENER GLOBAL ICI
+// ON N'APPELLE PLUS handleAuthStateChange() ICI. C'EST LA SOURCE DU BUG.
 // import { handleAuthStateChange } from './authService.js';
 // handleAuthStateChange(); 
 
-console.log('Auth UI initialisé.');
+console.log('Auth UI (formulaires) initialisé.');
