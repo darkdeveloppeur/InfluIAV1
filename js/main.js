@@ -1,73 +1,87 @@
 // On importe le client Supabase unique depuis notre fichier
 import supabaseClient from './auth/supabaseClient.js';
 
-let initialCheckDone = false; 
-
-// Fonction pour vérifier l'état et rediriger
-function handleAuthStateRedirect(session) {
-    // Évite les exécutions multiples rapides qui peuvent causer des boucles
-    if (initialCheckDone) {
-        // console.log("handleAuthStateRedirect: Vérification déjà faite récemment.");
-        return; 
-    }
-    initialCheckDone = true; 
-
+// Fonction UNIQUE pour vérifier l'état et rediriger
+function handleAuthRedirect(session) {
     const path = window.location.pathname;
-    // Vérifie si l'URL se termine par l'une des pages publiques connues
-    const isPublicPage = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html', '/reset-password.html'].some(p => path.endsWith(p));
-    const isDashboard = path.endsWith('/dashboard.html');
     
+    // Liste des pages accessibles au public (quand on est DÉCONNECTÉ)
+    const publicPages = [
+        '/', 
+        '/index.html', 
+        '/login.html', 
+        '/signup.html', 
+        '/pricing.html', 
+        '/forgot-password.html', 
+        '/reset-password.html'
+    ];
+
+    // Vérifie si la page actuelle EST une page publique
+    // On compare le chemin exact
+    const isPublicPage = publicPages.includes(path);
+
     console.log(`Vérification Auth: Connecté=${!!session}, Page Publique=${isPublicPage}, Path=${path}`);
 
-    if (session) { // Utilisateur connecté
-        // Si connecté et sur une page publique (pas l'accueil), rediriger vers dashboard
-        // On vérifie qu'on n'est pas déjà sur le dashboard pour éviter une boucle
-        if (isPublicPage && !isDashboard && path !== '/' && !path.endsWith('/index.html')) {
-             console.log('Connecté sur page publique -> dashboard');
-             window.location.replace('dashboard.html'); // Utilise replace pour éviter l'historique inutile
-        } else {
-             console.log('Connecté, pas de redirection nécessaire.');
+    if (session) {
+        // --- UTILISATEUR CONNECTÉ ---
+        // S'il est connecté et essaie de voir une page publique (comme login, ou index)...
+        if (isPublicPage) {
+            console.log('Connecté sur page publique -> dashboard');
+            // ...on le renvoie au dashboard.
+            window.location.replace('dashboard.html');
         }
-    } else { // Utilisateur déconnecté
-        // Si déconnecté et essaie d'accéder à une page privée, rediriger vers login
+        // S'il est sur une page privée (ex: dashboard.html), on ne fait rien.
+        
+    } else {
+        // --- UTILISATEUR DÉCONNECTÉ ---
+        // S'il est déconnecté et essaie de voir une page privée...
         if (!isPublicPage) {
             console.log('Déconnecté sur page privée -> login');
-            window.location.replace('login.html'); // Utilise replace
-        } else {
-            console.log('Déconnecté, pas de redirection nécessaire.');
+            // ...on le renvoie au login.
+            window.location.replace('login.html');
         }
+        // S'il est sur une page publique (ex: login.html), on ne fait rien.
     }
-    // Permet une nouvelle vérification après un court délai
-    setTimeout(() => { initialCheckDone = false; }, 500); 
 }
 
-// Listener global + Vérification initiale
+// --- Point d'entrée de la sécurité ---
 if (supabaseClient) {
-    // Écoute les changements d'état (connexion, déconnexion, token rafraîchi)
+    
+    // 1. Écoute les changements (connexion, déconnexion)
     supabaseClient.auth.onAuthStateChange((event, session) => {
         console.log(`Auth Event: ${event}`);
-        // Gère l'état actuel (connecté ou déconnecté) et redirige si besoin
-        handleAuthStateRedirect(session); 
+        
+        // Si l'événement est une connexion ou une déconnexion,
+        // on gère la redirection.
+        if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+            handleAuthRedirect(session);
+        }
     });
 
-    // Vérifie l'état au premier chargement de la page
-    supabaseClient.auth.getSession().then(({ data: { session } }) => {
-        console.log('Vérification session initiale au chargement.');
-        handleAuthStateRedirect(session);
+    // 2. Vérifie la session au premier chargement de la page
+    // C'est le plus important pour éviter les boucles
+    supabaseClient.auth.getSession().then(({ data: { session }, error }) => {
+        if (error) {
+            console.error("Erreur getSession:", error);
+            handleAuthRedirect(null); // En cas d'erreur, on considère déconnecté
+        } else {
+            console.log('Vérification session initiale au chargement.');
+            handleAuthRedirect(session);
+        }
     }).catch(error => {
-        console.error("Erreur getSession:", error);
-        handleAuthStateRedirect(null); // En cas d'erreur, on considère l'utilisateur comme déconnecté
+        // Gère les erreurs de promesse (au cas où)
+        console.error("Erreur promesse getSession:", error);
+        handleAuthRedirect(null);
     });
 
 } else {
-     // Si Supabase n'a pas pu être initialisé (clés manquantes ?)
-     console.warn('Supabase client non initialisé dans main.js. Authentification désactivée.');
-     // Vérifie si l'accès à la page actuelle est autorisé sans connexion
-     handleAuthStateRedirect(null); 
+     console.warn('Supabase client non initialisé. Authentification désactivée.');
+     // Traite comme déconnecté si Supabase plante
+     handleAuthRedirect(null); 
 }
 
-
 // --- Ton ancien code pour l'interface utilisateur (ne touche pas à Supabase) ---
+// (J'ai supprimé l'ancien code d'authentification d'ici pour le centraliser en haut)
 document.addEventListener('DOMContentLoaded', function() {
     // Gestion de la navigation active
     const currentPage = window.location.pathname.split('/').pop() || 'index.html'; // index.html par défaut si URL est '/'
