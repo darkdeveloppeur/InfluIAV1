@@ -20,7 +20,7 @@ function handleAuthRedirect(session) {
     const isLoginPage = path.endsWith('/login.html');
     const isDashboardPage = path.endsWith('/dashboard.html');
 
-    console.log(`Vérification Auth: Connecté=${!!session}, Page Publique=${isPublicPage}, Path=${path}`);
+    console.log(`(main.js) Vérification Auth: Connecté=${!!session}, Page Publique=${isPublicPage}, Path=${path}`);
 
     if (session) {
         // --- UTILISATEUR CONNECTÉ ---
@@ -28,7 +28,7 @@ function handleAuthRedirect(session) {
         // S'il est connecté et essaie de voir une page publique...
         // ...ET qu'il n'est PAS DÉJÀ sur le dashboard...
         if (isPublicPage && !isDashboardPage) {
-            console.log('Connecté sur page publique -> dashboard');
+            console.log('(main.js) Connecté sur page publique -> dashboard');
             // ...on le renvoie au dashboard.
             window.location.replace('dashboard.html');
         }
@@ -39,7 +39,7 @@ function handleAuthRedirect(session) {
         // S'il est déconnecté et essaie de voir une page privée...
         // ...ET qu'il n'est PAS DÉJÀ sur la page de login...
         if (!isPublicPage && !isLoginPage) {
-            console.log('Déconnecté sur page privée -> login');
+            console.log('(main.js) Déconnecté sur page privée -> login');
             // ...on le renvoie au login.
             window.location.replace('login.html');
         }
@@ -51,7 +51,7 @@ if (supabaseClient) {
     
     // 1. Écoute les changements (connexion, déconnexion)
     supabaseClient.auth.onAuthStateChange((event, session) => {
-        console.log(`Auth Event: ${event}`);
+        console.log(`(main.js) Auth Event: ${event}`);
         
         // Si l'événement est une connexion ou une déconnexion,
         // on gère la redirection.
@@ -63,20 +63,20 @@ if (supabaseClient) {
     // 2. Vérifie la session au premier chargement de la page
     supabaseClient.auth.getSession().then(({ data: { session }, error }) => {
         if (error) {
-            console.error("Erreur getSession:", error);
+            console.error("(main.js) Erreur getSession:", error);
             handleAuthRedirect(null); // En cas d'erreur, on considère déconnecté
         } else {
-            console.log('Vérification session initiale au chargement.');
+            console.log('(main.js) Vérification session initiale au chargement.');
             handleAuthRedirect(session);
         }
     }).catch(error => {
         // Gère les erreurs de promesse (au cas où)
-        console.error("Erreur promesse getSession:", error);
+        console.error("(main.js) Erreur promesse getSession:", error);
         handleAuthRedirect(null);
     });
 
 } else {
-     console.warn('Supabase client non initialisé. Authentification désactivée.');
+     console.warn('(main.js) Supabase client non initialisé. Authentification désactivée.');
      // Traite comme déconnecté si Supabase plante
      handleAuthRedirect(null); 
 }
@@ -129,7 +129,7 @@ function simulateDashboardData() {
 function toggleSection(sectionId) { 
     const section = document.getElementById(sectionId);
     if (section) {
-        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        section.style.display = section.style.display === 'none' ? 'block : 'none';
     }
  }
 
