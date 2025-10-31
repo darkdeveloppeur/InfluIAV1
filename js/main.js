@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ... (le reste des fonctions simulateDashboardData, toggleSection, showLoading reste identique) ...
 function simulateDashboardData() { 
     const stats = [
-        { id: 'followers', value: '12.4K' }, { id: 'engagement', value: '4.2%' },
+        { id: 'followers', value: '12.4K' }, { id:D 'engagement', value: '4.2%' },
         { id: 'views', value: '156K' }, { id: 'revenue', value: '€245' }
     ];
     stats.forEach(stat => {
@@ -126,13 +126,16 @@ function simulateDashboardData() {
     });
  }
 
+// Fonction pour afficher/cacher des sections (utilisé dans admin.html et profile.html)
 function toggleSection(sectionId) { 
     const section = document.getElementById(sectionId);
     if (section) {
-        section.style.display = section.style.display === 'none' ? 'block : 'none';
+        // CORRECTION DE LA FAUTE DE FRAPPE ICI :
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
     }
  }
 
+// Fonction pour montrer un indicateur de chargement (peut être utile plus tard)
 function showLoading() { 
     const loading = document.createElement('div');
     loading.className = 'loading';
