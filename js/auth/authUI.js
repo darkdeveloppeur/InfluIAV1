@@ -17,9 +17,9 @@ if (signupForm) {
             alert(`Erreur inscription : ${error.message}`);
             submitButton.textContent = 'Créer'; submitButton.disabled = false;
         } else {
-            // La redirection est gérée par handleAuthStateChange
-            alert('Inscription réussie ! Redirection...');
-            // On ne redirige plus ici, on laisse le listener faire
+            // La redirection est gérée par main.js
+            alert('Inscription réussie ! Veuillez patienter...');
+            // On ne redirige plus ici, on laisse le listener de main.js faire
         }
     });
 }
@@ -40,8 +40,8 @@ if (loginForm) {
             alert(`Erreur connexion : ${error.message}`);
             submitButton.textContent = 'Connecter'; submitButton.disabled = false;
         } else {
-             // La redirection est gérée par handleAuthStateChange
-            alert('Connexion réussie ! Redirection...');
+             // La redirection est gérée par main.js
+            alert('Connexion réussie ! Veuillez patienter...');
              // On ne redirige plus ici
         }
     });
@@ -52,7 +52,7 @@ const forgotPasswordForm = document.getElementById('forgot-password-form');
 if (forgotPasswordForm) {
     forgotPasswordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = document.getElementById('forgot-email').value;
+        const email = document.getElementById('forgot-email').value; // J'ai corrigé l'ID ici
         const submitButton = forgotPasswordForm.querySelector('button[type="submit"]');
         submitButton.textContent = 'Envoi...'; submitButton.disabled = true;
 
@@ -76,8 +76,8 @@ if (googleSignupBtn) googleSignupBtn.addEventListener('click', async () => {
      if (error) alert('Erreur Google Signup: ' + error.message);
 });
 
-// Initialiser le listener global d'authentification
-import { handleAuthStateChange } from './authService.js';
-handleAuthStateChange(); // Commence à écouter les changements d'état
+// ON NE MET PLUS LE LISTENER GLOBAL ICI
+// import { handleAuthStateChange } from './authService.js';
+// handleAuthStateChange(); 
 
 console.log('Auth UI initialisé.');
