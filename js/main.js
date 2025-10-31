@@ -1,6 +1,10 @@
 // On importe le client Supabase unique depuis notre fichier
 import supabaseClient from './auth/supabaseClient.js';
 
+// -------------------------------------------------------------------
+// PARTIE 1 : GESTION DE L'AUTHENTIFICATION (Logique de redirection)
+// -------------------------------------------------------------------
+
 // Fonction UNIQUE pour vérifier l'état et rediriger
 function handleAuthRedirect(session) {
     const path = window.location.pathname;
@@ -81,17 +85,22 @@ if (supabaseClient) {
      handleAuthRedirect(null); 
 }
 
-// --- Ton ancien code pour l'interface utilisateur (ne touche pas à Supabase) ---
+
+// -------------------------------------------------------------------
+// PARTIE 2 : FONCTIONS DE L'INTERFACE (Copie 100% identique à l'original)
+// -------------------------------------------------------------------
+
 document.addEventListener('DOMContentLoaded', function() {
     // Gestion de la navigation active
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html'; // index.html par défaut si URL est '/'
     const navLinks = document.querySelectorAll('.nav-links a, .sidebar-menu a');
     navLinks.forEach(link => {
+        // Gère le cas où href est juste 'index.html' ou '/'
         const linkHref = link.getAttribute('href').split('/').pop() || 'index.html'; 
         if (linkHref === currentPage) {
             link.classList.add('active');
         } else {
-            link.classList.remove('active'); 
+            link.classList.remove('active'); // Important pour enlever l'état actif des autres liens
         }
     });
     
@@ -103,20 +112,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gestion des formulaires non liés à l'authentification
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
+        // Exclut explicitement les formulaires gérés par authUI.js
         if (!['login-form', 'signup-form', 'forgot-password-form'].includes(form.id)) {
             form.addEventListener('submit', function(e) {
-                e.preventDefault(); 
-                alert('Fonctionnalité en cours de développement!');
+                e.preventDefault(); // Empêche l'envoi normal
+                alert('Fonctionnalité en cours de développement!'); // Message temporaire
             });
         }
     });
 });
 
-// ... (le reste des fonctions simulateDashboardData, toggleSection, showLoading reste identique) ...
+// Fonction pour simuler l'affichage des stats (à remplacer par des vraies données plus tard)
 function simulateDashboardData() { 
     const stats = [
-        { id: 'followers', value: '12.4K' }, { id:D 'engagement', value: '4.2%' },
-        { id: 'views', value: '156K' }, { id: 'revenue', value: '€245' }
+        { id: 'followers', value: '12.4K' }, 
+        { id: 'engagement', value: '4.2%' }, // <-- CORRECTION DE MA FAUTE DE FRAPPE
+        { id: 'views', value: '156K' }, 
+        { id: 'revenue', value: '€245' }
     ];
     stats.forEach(stat => {
         const element = document.getElementById(stat.id);
@@ -130,7 +142,7 @@ function simulateDashboardData() {
 function toggleSection(sectionId) { 
     const section = document.getElementById(sectionId);
     if (section) {
-        // CORRECTION DE LA FAUTE DE FRAPPE ICI :
+        // Simple bascule d'affichage
         section.style.display = section.style.display === 'none' ? 'block' : 'none';
     }
  }
@@ -140,6 +152,7 @@ function showLoading() {
     const loading = document.createElement('div');
     loading.className = 'loading';
     loading.innerHTML = 'Chargement...';
+    // Styles basiques pour le rendre visible
     loading.style.cssText = `
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
         background: var(--primary, #4361ee); color: white; padding: 1rem 2rem;
@@ -147,6 +160,7 @@ function showLoading() {
     `;
     document.body.appendChild(loading);
     
+    // Disparaît après 1 seconde (simulation)
     setTimeout(() => {
         loading.remove();
     }, 1000);
