@@ -46,28 +46,8 @@ export async function resetPassword(email) {
      return await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo: resetURL });
 }
 
-// Gérer l'état d'authentification (redirection)
-export function handleAuthStateChange() {
-    if (!supabaseClient) return;
-    supabaseClient.auth.onAuthStateChange((event, session) => {
-        console.log(`Auth Event (handleAuthStateChange): ${event}`);
-        if (event === "SIGNED_IN" && session?.user) {
-            const currentPath = window.location.pathname;
-            // Ne redirige que si on n'est PAS déjà sur une page privée
-            // (On suppose que toutes les pages sauf celles listées sont privées)
-            const publicPages = ['/', '/index.html', '/login.html', '/signup.html', '/pricing.html', '/forgot-password.html', '/reset-password.html'];
-            if (publicPages.some(p => currentPath.endsWith(p)) ) {
-                console.log("SIGNED_IN sur page publique -> dashboard");
-                window.location.replace("dashboard.html");
-            }
-        } else if (event === "SIGNED_OUT") {
-            // Optionnel : rediriger vers l'accueil si déconnecté
-            // window.location.replace("index.html");
-        }
-    });
-}
-
 // Vérifier la session au chargement
+// NOTE: La GESTION de la redirection est dans js/main.js
 export async function checkInitialSession() {
      if (!supabaseClient) return null;
      const { data: { session }, error } = await supabaseClient.auth.getSession();
